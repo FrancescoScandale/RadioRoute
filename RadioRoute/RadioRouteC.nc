@@ -153,41 +153,23 @@ implementation {
 	/*
 	* Implement here the logic to trigger the Node 1 to send the first REQ packet
 	*/
-	
-	uint16_t i;
-	bool found = FALSE;
-	
-	// Nodes 1 wants to transmit a packet to node 7,
-    // thus check if it already has the destination in its own routing table
-  	for (i = 0; i < MAX_NODES; i++) {
-        if(routing_table[i].dst == destination){
-        	found = TRUE;
-        	break;
-        } else if(routing_table[i].cost == 0)	break;
-    }
-    
-    if (found) ; //TODO send following routing entry found
-    else {
-    	if (locked || route_req_sent) { //assumption that a node has to send only one ROUTE_REQ
-      		return;
-    	}
-    	else {
-		  	radio_route_msg_t* msg = (radio_route_msg_t*)call Packet.getPayload(&packet, sizeof(radio_route_msg_t));
-		  	if (msg == NULL) {
-				return;
-      		}
-			msg->type = 1;
-			msg->dst = destination;
-			if (generate_send(AM_BROADCAST_ADDR, &packet, msg->type) == TRUE) {
-				dbg("radio_send", "Send generated\n");
-		  	} else {
-				dbg("radio_send", "Send is already being generated, cancelling this one.\n");
-			}
-    	}
-    	
-    	
-    	
-    }
+
+	if (locked || route_req_sent) { //assumption that a node has to send only one ROUTE_REQ
+		return;
+	}
+	else {
+		radio_route_msg_t* msg = (radio_route_msg_t*)call Packet.getPayload(&packet, sizeof(radio_route_msg_t));
+		if (msg == NULL) {
+			return;
+		}
+		msg->type = 1;
+		msg->dst = destination;
+		if (generate_send(AM_BROADCAST_ADDR, &packet, msg->type) == TRUE) {
+			dbg("radio_send", "Send generated\n");
+		} else {
+			dbg("radio_send", "Send is already being generated, cancelling this one.\n");
+		}
+	}	
   }
 
   event message_t* Receive.receive(message_t* bufPtr, 
@@ -284,7 +266,24 @@ implementation {
 				
 					// case 1.2.1: The node is in the routing table
 					if(found) {
-						// rimanda indietro la risposta //TODO
+						if (locked || route_req_sent) {
+		  					return bufPtr;
+						}
+						else {
+							msg = (radio_route_msg_t*)call Packet.getPayload(&packet, sizeof(radio_route_msg_t));
+					  		if (msg == NULL) {
+								return bufPtr;
+				  			}
+							msg->type = 2;
+							msg->src = TOS_NODE_ID;
+							msg->dst = received_msg->dst;
+							msg->value = routing_table[i].cost+1;
+							if (generate_send(AM_BROADCAST_ADDR, &packet, msg->type) == TRUE) {
+								dbg("radio_send", "Send generated\n");
+					  		} else {
+								dbg("radio_send", "Send is already being generated, cancelling this one.\n");
+							}
+					  	}
 					} 
 					// case 1.2.2: The node is not in the routing table
 					else {
