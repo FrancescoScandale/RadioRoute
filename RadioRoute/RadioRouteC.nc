@@ -172,8 +172,7 @@ implementation {
 	}	
   }
 
-  event message_t* Receive.receive(message_t* bufPtr, 
-				   void* payload, uint8_t len) {
+  event message_t* Receive.receive(message_t* bufPtr, void* payload, uint8_t len) {
 	/*
 	* Parse the receive packet.
 	* Implement all the functionalities
@@ -224,12 +223,15 @@ implementation {
 							dbg("radio_send", "Send is already being generated, cancelling this one.\n");
 						}
 				  	}
+				} else if(TOS_NODE_ID == received_msg->dst){
+					dbg("radio", "Data arrived ad destination! Data: %hu\n",received_msg->value);
 				}
 				else {
 					dbg("radio", "Can't send to the next node: I don't have the destination in my routing table!\n");
 				}
 				
 				break;
+
 			case 1: //Route request message
 				dbg_clear("radio_pack","\t\t Payload \n" );
 				dbg_clear("radio_pack", "\t\t msg_type: ROUTE_REQ\t msg_dst: %hu\t\n", received_msg->dst);
@@ -306,7 +308,8 @@ implementation {
 					}
 				}
 				break; 
-			case 2: 
+
+			case 2:
 				dbg_clear("radio_pack","\t\t Payload \n" );
 				dbg_clear("radio_pack", "\t\t msg_type: ROUTE_REPLY\t msg_src: %hu\t msg_dst: %hu\t msg_value: %hu \n", received_msg->src, received_msg->dst, received_msg->value);
 				//ROUTE_REPLY arrives at everyone but node 7 doesn't have to answer
