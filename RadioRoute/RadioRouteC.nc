@@ -140,7 +140,7 @@ implementation {
     }
     else{
 		//dbg for error
-		dbgerror("radio", "Error in starting the radio\n"); //TODO
+		dbgerror("radio", "Error in starting the radio\n");
 		call AMControl.start();
     }
   }
@@ -160,7 +160,6 @@ implementation {
 	// Nodes 1 wants to transmit a packet to node 7,
     // thus check if it already has the destination in its own routing table
   	for (i = 0; i < MAX_NODES; i++) {
-        dbg("boot", "Element %hu: dst = %hu\n", i, routing_table[i].dst); //TODO remove this line
         if(routing_table[i].dst == destination){
         	found = TRUE;
         	break;
@@ -326,7 +325,6 @@ implementation {
 						routing_table[i].dst = received_msg->dst;
 						routing_table[i].next_hop = received_msg->src;
 						routing_table[i].cost = received_msg->value;
-						dbg("radio_pack","TAB: \t dest: %hu\t next_hop: %hu\t cost: %hu\n", routing_table[i].dst, routing_table[i].next_hop, routing_table[i].cost); //TODO remove
 						
 						//node 1 starts sending the data - last ROUTE_REPLY received
 						if (TOS_NODE_ID == 1 && routing_table[i].dst == destination && !data_sent){
@@ -411,7 +409,6 @@ implementation {
 	if (&queued_packet == bufPtr && error == SUCCESS) {
 		locked = FALSE;
     	dbg("radio_send", "Sended at time %s\n", sim_time_string());
-    	dbg_clear("radio_send", "   >>>>\t\ttype: %hu\tsrc: %hu\tdst: %hu\tvalue: %hu\n", ((radio_route_msg_t*)(call Packet.getPayload(bufPtr, sizeof(radio_route_msg_t))))->type, ((radio_route_msg_t*)(call Packet.getPayload(bufPtr, sizeof(radio_route_msg_t))))->src, ((radio_route_msg_t*)(call Packet.getPayload(bufPtr, sizeof(radio_route_msg_t))))->dst, ((radio_route_msg_t*)(call Packet.getPayload(bufPtr, sizeof(radio_route_msg_t))))->value); //TODO remove
     }
     else{
       dbgerror("radio_send", "Send done error!");
