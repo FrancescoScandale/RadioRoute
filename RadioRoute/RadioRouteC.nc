@@ -169,20 +169,21 @@ implementation {
     
     if (found) ; //TODO send following routing entry found
     else {
-    	if (locked || route_req_sent) {
+    	if (locked || route_req_sent) { //assumption that a node has to send only one ROUTE_REQ
       		return;
     	}
     	else {
-		  	radio_route_msg_t* msg = (radio_route_msg_t*)call Packet.getPayload(&queued_packet, sizeof(radio_route_msg_t));
+		  	radio_route_msg_t* msg = (radio_route_msg_t*)call Packet.getPayload(&packet, sizeof(radio_route_msg_t));
 		  	if (msg == NULL) {
 				return;
       		}
 			msg->type = 1;
 			msg->dst = destination;
-			if (generate_send(AM_BROADCAST_ADDR, &queued_packet, msg->type) == TRUE) {
-				route_req_sent = TRUE;
+			if (generate_send(AM_BROADCAST_ADDR, &packet, msg->type) == TRUE) {
 				dbg("radio_send", "Send generated\n");
-		  	} else ; //TODO
+		  	} else {
+				dbg("radio_send", "Send is already being generated, cancelling this one.\n");
+			}
     	}
     	
     	
@@ -228,7 +229,7 @@ implementation {
 		  				return bufPtr;
 					}
 					else {
-						msg = (radio_route_msg_t*)call Packet.getPayload(&queued_packet, sizeof(radio_route_msg_t));
+						msg = (radio_route_msg_t*)call Packet.getPayload(&packet, sizeof(radio_route_msg_t));
 				  		if (msg == NULL) {
 							return bufPtr;
 			  			}
@@ -236,13 +237,15 @@ implementation {
 						msg->src = TOS_NODE_ID;
 						msg->dst = received_msg->dst;
 						msg->value = received_msg->value;
-						if (generate_send(routing_table[i].next_hop, &queued_packet, msg->type) == TRUE) {
+						if (generate_send(routing_table[i].next_hop, &packet, msg->type) == TRUE) {
 							dbg("radio_send", "Send generated\n");
-				  		} else ; //TODO
+				  		} else {
+							dbg("radio_send", "Send is already being generated, cancelling this one.\n");
+						}
 				  	}
 				}
 				else {
-					// TODO should not happen (caso in cui un nodo riceve il pachetto DATA e non ha la dst nella routing table, dovrebbe mandare nuove ROUTE_REQ)
+					dbg("radio", "Can't send to the next node: I don't have the destination in my routing table!\n");
 				}
 				
 				break;
@@ -256,7 +259,7 @@ implementation {
 		  				return bufPtr;
 					}
 					else {
-						msg = (radio_route_msg_t*)call Packet.getPayload(&queued_packet, sizeof(radio_route_msg_t));
+						msg = (radio_route_msg_t*)call Packet.getPayload(&packet, sizeof(radio_route_msg_t));
 				  		if (msg == NULL) {
 							return bufPtr;
 			  			}
@@ -264,14 +267,13 @@ implementation {
 						msg->src = TOS_NODE_ID;
 						msg->dst = received_msg->dst;
 						msg->value = 1;
-						if (generate_send(AM_BROADCAST_ADDR, &queued_packet, msg->type) == TRUE) {
-							route_rep_sent = TRUE;
+						if (generate_send(AM_BROADCAST_ADDR, &packet, msg->type) == TRUE) {
 							dbg("radio_send", "Send generated\n");
-				  		} else ; //TODO
+				  		} else {
+							dbg("radio_send", "Send is already being generated, cancelling this one.\n");
+						}
 				  	}
-			  	
-			  	
-				} else {			
+				} else { //case 1.2: The node is not the one required	
 					//search in the routing table					
 					found = FALSE;
 		  			for (i = 0; i < MAX_NODES; i++) {
@@ -281,26 +283,27 @@ implementation {
 						} else if(routing_table[i].cost == 0)	break;
 					}
 				
-					// case 1.2: The node is in the routing table
+					// case 1.2.1: The node is in the routing table
 					if(found) {
-						;// rimanda indietro la risposta //TODO
+						// rimanda indietro la risposta //TODO
 					} 
-					// case 1.3: The node is not in the routing table
+					// case 1.2.2: The node is not in the routing table
 					else {
 						if (locked || route_req_sent) {
 		  					return bufPtr;
 						}
 						else {
-							msg = (radio_route_msg_t*)call Packet.getPayload(&queued_packet, sizeof(radio_route_msg_t));
+							msg = (radio_route_msg_t*)call Packet.getPayload(&packet, sizeof(radio_route_msg_t));
 					  		if (msg == NULL) {
 								return bufPtr;
 				  			}
 							msg->type = 1;
 							msg->dst = received_msg->dst;
-							if (generate_send(AM_BROADCAST_ADDR, &queued_packet, msg->type) == TRUE) {
-								route_req_sent = TRUE;
+							if (generate_send(AM_BROADCAST_ADDR, &packet, msg->type) == TRUE) {
 								dbg("radio_send", "Send generated\n");
-					  		} else ; //TODO
+					  		} else {
+								dbg("radio_send", "Send is already being generated, cancelling this one.\n");
+							}
 					  	}
 					}
 				}
@@ -308,44 +311,48 @@ implementation {
 			case 2: 
 				dbg_clear("radio_pack","\t\t Payload \n" );
 				dbg_clear("radio_pack", "\t\t msg_type: ROUTE_REPLY\t msg_src: %hu\t msg_dst: %hu\t msg_value: %hu \n", received_msg->src, received_msg->dst, received_msg->value);
+				//ROUTE_REPLY arrives at everyone but node 7 doesn't have to answer
 				if (TOS_NODE_ID != received_msg->dst){
 					found = FALSE;
 		  			for (i = 0; i < MAX_NODES; i++) {
 						if(routing_table[i].dst == destination){
 							found = TRUE;
 							break;
-						} else if(routing_table[i].cost == 0)	break;
+						} else if(routing_table[i].cost == 0)	break; //check done to find the 1st empty position in the routing table
 					}
-				
+
+					//if not in the routing table or received cost is smaller
 					if(!found || (found && routing_table[i].cost>received_msg->value)) {
 						routing_table[i].dst = received_msg->dst;
 						routing_table[i].next_hop = received_msg->src;
 						routing_table[i].cost = received_msg->value;
 						dbg("radio_pack","TAB: \t dest: %hu\t next_hop: %hu\t cost: %hu\n", routing_table[i].dst, routing_table[i].next_hop, routing_table[i].cost); //TODO remove
 						
-						
+						//node 1 starts sending the data - last ROUTE_REPLY received
 						if (TOS_NODE_ID == 1 && routing_table[i].dst == destination && !data_sent){
-							msg = (radio_route_msg_t*)call Packet.getPayload(&queued_packet, sizeof(radio_route_msg_t));
+							msg = (radio_route_msg_t*)call Packet.getPayload(&packet, sizeof(radio_route_msg_t));
 						  	if (msg == NULL) {
 								return bufPtr;
 					  		}
 							msg->type = 0;
 							msg->src = TOS_NODE_ID;
 							msg->dst = destination;
-							msg->value = 5; 
-							if (generate_send(routing_table[i].next_hop, &queued_packet, msg->type) == TRUE) {
+							msg->value = 5;
+							if (generate_send(routing_table[i].next_hop, &packet, msg->type) == TRUE) {
 								data_sent = TRUE;
 								dbg("radio_send", "Send generated\n");
-						  	} else ; //TODO						
+						  	} else {
+								dbg("radio_send", "Send is already being generated, cancelling this one.\n");
+							}					
 						}
-						else { //TODO va bene se quando arriva il pacchetto nel nodo 1 non fa più il forward reply ??
+						else {
 						
 							if (locked || route_rep_sent) {
 			  					return bufPtr;
 							}
 							else {
 								// forward reply
-								msg = (radio_route_msg_t*)call Packet.getPayload(&queued_packet, sizeof(radio_route_msg_t));
+								msg = (radio_route_msg_t*)call Packet.getPayload(&packet, sizeof(radio_route_msg_t));
 							  	if (msg == NULL) {
 									return bufPtr;
 						  		}
@@ -353,10 +360,11 @@ implementation {
 								msg->src = TOS_NODE_ID;
 								msg->dst = received_msg->dst;
 								msg->value = received_msg->value + 1; 
-								if (generate_send(AM_BROADCAST_ADDR, &queued_packet, msg->type) == TRUE) {
-									route_req_sent = TRUE;
+								if (generate_send(AM_BROADCAST_ADDR, &packet, msg->type) == TRUE) {
 									dbg("radio_send", "Send generated\n");
-							  	} else ; //TODO
+							  	} else {
+									dbg("radio_send", "Send is already being generated, cancelling this one.\n");
+								}
 							}	
 						
 						}			  	
@@ -365,17 +373,12 @@ implementation {
 				break; 
 		}
 		
-		//for ( i=0; i<15; i++){
-		
 		if (!person_code) {
 			for (j = 1; j <= PERSON_CODE; j*=10) ;
 			person_code = PERSON_CODE;
 		}
 	    j = j/10;
-		//dbg("led_0", "%u\n", (person_code/j) % 3);
-		
-		//dbg("led_0", ">>> status %u - %u - %u - %u - %u - %u - %u - %u\n", person_code & 0x1, person_code & 0x2, person_code & 0x4, person_code & 0x8, person_code & 0x16, person_code & 0x32, person_code & 0x64, person_code & 0x128);
-		
+
 		switch((person_code/j) % 3) {
 			case 0:
 				call Leds.led0Toggle();
@@ -383,11 +386,11 @@ implementation {
 				break;
 			case 1:
 				call Leds.led1Toggle();
-				dbg("led_0", "Toggle led 1, updated status %u\n", call Leds.get() & LEDS_LED1);
+				dbg("led_1", "Toggle led 1, updated status %u\n", call Leds.get() & LEDS_LED1);
 				break;
 			case 2:
 				call Leds.led2Toggle();
-				dbg("led_0", "Toggle led 2, updated status %u\n", call Leds.get() & LEDS_LED2);
+				dbg("led_2", "Toggle led 2, updated status %u\n", call Leds.get() & LEDS_LED2);
 				break;
 		}
 

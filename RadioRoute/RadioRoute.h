@@ -12,10 +12,10 @@ typedef nx_struct radio_route_msg {
 	nx_uint16_t src;
 	
 	//field 3
-	nx_uint16_t dst;
+	nx_uint16_t dst; //when ROUTE_RQS or ROUTE_REPLY -> "node requested"
 	
 	//field 4
-	nx_uint16_t value;
+	nx_uint16_t value; //when ROUTE_REPLY -> "cost"
 } radio_route_msg_t;
 
 typedef nx_struct routing_table_entry {
