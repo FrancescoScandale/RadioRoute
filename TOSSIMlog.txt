@@ -1,0 +1,292 @@
+********************************************
+*                                          *
+*             TOSSIM Script                *
+*                                          *
+********************************************
+Initializing mac....
+Initializing radio channels....
+    using topology file: topology.txt
+    using noise file: meyer-heavy.txt
+Initializing simulator....
+Activate debug message on channel init
+Activate debug message on channel boot
+Activate debug message on channel timer
+Activate debug message on channel led_0
+Activate debug message on channel led_1
+Activate debug message on channel led_2
+Activate debug message on channel radio
+Activate debug message on channel radio_send
+Activate debug message on channel radio_rec
+Activate debug message on channel radio_pack
+Creating node 1...
+>>>Will boot at time 0 [sec]
+Creating node 2...
+>>>Will boot at time 0 [sec]
+Creating node 3...
+>>>Will boot at time 0 [sec]
+Creating node 4...
+>>>Will boot at time 0 [sec]
+Creating node 5...
+>>>Will boot at time 0 [sec]
+Creating node 6...
+>>>Will boot at time 0 [sec]
+Creating node 7...
+>>>Will boot at time 0 [sec]
+Creating radio channels...
+>>>Setting radio channel from node  1  to node  2  with gain  -60.0  dBm
+>>>Setting radio channel from node  2  to node  1  with gain  -60.0  dBm
+>>>Setting radio channel from node  1  to node  3  with gain  -60.0  dBm
+>>>Setting radio channel from node  3  to node  1  with gain  -60.0  dBm
+>>>Setting radio channel from node  2  to node  4  with gain  -60.0  dBm
+>>>Setting radio channel from node  4  to node  2  with gain  -60.0  dBm
+>>>Setting radio channel from node  3  to node  4  with gain  -60.0  dBm
+>>>Setting radio channel from node  4  to node  3  with gain  -60.0  dBm
+>>>Setting radio channel from node  3  to node  5  with gain  -60.0  dBm
+>>>Setting radio channel from node  5  to node  3  with gain  -60.0  dBm
+>>>Setting radio channel from node  4  to node  6  with gain  -60.0  dBm
+>>>Setting radio channel from node  6  to node  4  with gain  -60.0  dBm
+>>>Setting radio channel from node  5  to node  6  with gain  -60.0  dBm
+>>>Setting radio channel from node  6  to node  5  with gain  -60.0  dBm
+>>>Setting radio channel from node  5  to node  7  with gain  -60.0  dBm
+>>>Setting radio channel from node  7  to node  5  with gain  -60.0  dBm
+>>>Setting radio channel from node  6  to node  7  with gain  -60.0  dBm
+>>>Setting radio channel from node  7  to node  6  with gain  -60.0  dBm
+Initializing Closest Pattern Matching (CPM)...
+Reading noise model data file: meyer-heavy.txt
+Loading:##Done!
+>>>Creating noise model for node: 1
+>>>Creating noise model for node: 2
+>>>Creating noise model for node: 3
+>>>Creating noise model for node: 4
+>>>Creating noise model for node: 5
+>>>Creating noise model for node: 6
+>>>Creating noise model for node: 7
+Start simulation with TOSSIM! 
+
+
+
+DEBUG (1): Application booted.
+DEBUG (7): Application booted.
+DEBUG (3): Application booted.
+DEBUG (6): Application booted.
+DEBUG (2): Application booted.
+DEBUG (5): Application booted.
+DEBUG (4): Application booted.
+DEBUG (7): Radio on!
+DEBUG (6): Radio on!
+DEBUG (1): Radio on!
+DEBUG (1): Timer1 started at time 0:0:0.000000010
+DEBUG (3): Radio on!
+DEBUG (4): Radio on!
+DEBUG (2): Radio on!
+DEBUG (5): Radio on!
+DEBUG (1): Sending packet at time 0:0:4.942382822 
+DEBUG (3): Received packet at time 0:0:4.950653037
+DEBUG (3): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REQ	 msg_dst: 7	
+DEBUG (3): Toggle led 1
+DEBUG (3): Led status: 010
+DEBUG (2): Received packet at time 0:0:4.950653037
+DEBUG (2): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REQ	 msg_dst: 7	
+DEBUG (2): Toggle led 1
+DEBUG (2): Led status: 010
+DEBUG (2): Sending packet at time 0:0:5.119140635 
+DEBUG (4): Received packet at time 0:0:5.120956420
+DEBUG (4): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REQ	 msg_dst: 7	
+DEBUG (4): Toggle led 1
+DEBUG (4): Led status: 010
+DEBUG (1): Received packet at time 0:0:5.120956420
+DEBUG (1): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REQ	 msg_dst: 7	
+DEBUG (3): Sending packet at time 0:0:5.210937510 
+DEBUG (5): Received packet at time 0:0:5.213546747
+DEBUG (5): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REQ	 msg_dst: 7	
+DEBUG (5): Toggle led 1
+DEBUG (5): Led status: 010
+DEBUG (4): Received packet at time 0:0:5.213546747
+DEBUG (4): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REQ	 msg_dst: 7	
+DEBUG (1): Received packet at time 0:0:5.213546747
+DEBUG (1): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REQ	 msg_dst: 7	
+DEBUG (4): Sending packet at time 0:0:5.482421885 
+DEBUG (6): Received packet at time 0:0:5.491210896
+DEBUG (6): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REQ	 msg_dst: 7	
+DEBUG (6): Toggle led 1
+DEBUG (6): Led status: 010
+DEBUG (3): Received packet at time 0:0:5.491210896
+DEBUG (3): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REQ	 msg_dst: 7	
+DEBUG (2): Received packet at time 0:0:5.491210896
+DEBUG (2): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REQ	 msg_dst: 7	
+DEBUG (5): Sending packet at time 0:0:5.680664072 
+DEBUG (7): Received packet at time 0:0:5.689605670
+DEBUG (7): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REQ	 msg_dst: 7	
+DEBUG (7): Toggle led 1
+DEBUG (7): Led status: 010
+DEBUG (6): Received packet at time 0:0:5.689605670
+DEBUG (6): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REQ	 msg_dst: 7	
+DEBUG (3): Received packet at time 0:0:5.689605670
+DEBUG (3): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REQ	 msg_dst: 7	
+DEBUG (6): Sending packet at time 0:0:6.059570322 
+DEBUG (7): Received packet at time 0:0:6.067489587
+DEBUG (7): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REQ	 msg_dst: 7	
+DEBUG (5): Received packet at time 0:0:6.067489587
+DEBUG (5): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REQ	 msg_dst: 7	
+DEBUG (4): Received packet at time 0:0:6.067489587
+DEBUG (4): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REQ	 msg_dst: 7	
+DEBUG (7): Sending packet at time 0:0:6.362304697 
+DEBUG (6): Received packet at time 0:0:6.368820162
+DEBUG (6): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REPLY	 msg_src: 7	 msg_dst: 7	 msg_value: 1 
+DEBUG (6): Toggle led 0
+DEBUG (6): Led status: 110
+DEBUG (5): Received packet at time 0:0:6.368820162
+DEBUG (5): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REPLY	 msg_src: 7	 msg_dst: 7	 msg_value: 1 
+DEBUG (5): Toggle led 0
+DEBUG (5): Led status: 110
+DEBUG (5): Sending packet at time 0:0:6.835937510 
+DEBUG (7): Received packet at time 0:0:6.840789776
+DEBUG (7): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REPLY	 msg_src: 5	 msg_dst: 7	 msg_value: 2 
+DEBUG (7): Toggle led 0
+DEBUG (7): Led status: 110
+DEBUG (6): Received packet at time 0:0:6.840789776
+DEBUG (6): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REPLY	 msg_src: 5	 msg_dst: 7	 msg_value: 2 
+DEBUG (6): Toggle led 0
+DEBUG (6): Led status: 010
+DEBUG (3): Received packet at time 0:0:6.840789776
+DEBUG (3): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REPLY	 msg_src: 5	 msg_dst: 7	 msg_value: 2 
+DEBUG (3): Toggle led 0
+DEBUG (3): Led status: 110
+DEBUG (6): Sending packet at time 0:0:6.937500010 
+DEBUG (7): Received packet at time 0:0:6.944976773
+DEBUG (7): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REPLY	 msg_src: 6	 msg_dst: 7	 msg_value: 2 
+DEBUG (7): Toggle led 0
+DEBUG (7): Led status: 010
+DEBUG (5): Received packet at time 0:0:6.944976773
+DEBUG (5): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REPLY	 msg_src: 6	 msg_dst: 7	 msg_value: 2 
+DEBUG (5): Toggle led 0
+DEBUG (5): Led status: 010
+DEBUG (4): Received packet at time 0:0:6.944976773
+DEBUG (4): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REPLY	 msg_src: 6	 msg_dst: 7	 msg_value: 2 
+DEBUG (4): Toggle led 0
+DEBUG (4): Led status: 110
+DEBUG (3): Sending packet at time 0:0:7.100585947 
+DEBUG (5): Received packet at time 0:0:7.104598985
+DEBUG (5): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REPLY	 msg_src: 3	 msg_dst: 7	 msg_value: 3 
+DEBUG (5): Toggle led 1
+DEBUG (5): Led status: 000
+DEBUG (4): Received packet at time 0:0:7.104598985
+DEBUG (4): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REPLY	 msg_src: 3	 msg_dst: 7	 msg_value: 3 
+DEBUG (4): Toggle led 0
+DEBUG (4): Led status: 010
+DEBUG (1): Received packet at time 0:0:7.104598985
+DEBUG (1): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REPLY	 msg_src: 3	 msg_dst: 7	 msg_value: 3 
+DEBUG (1): Toggle led 1
+DEBUG (1): Led status: 010
+DEBUG (1): Sending packet at time 0:0:7.164062510 
+DEBUG (3): Received packet at time 0:0:7.172500571
+DEBUG (3): 	 Payload length 7 
+		   Payload 
+		   msg_type: DATA	 msg_src: 1	 msg_dst: 7	 msg_value: 5 
+DEBUG (3): Toggle led 0
+DEBUG (3): Led status: 010
+DEBUG (4): Sending packet at time 0:0:7.306640635 
+DEBUG (6): Received packet at time 0:0:7.311706523
+DEBUG (6): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REPLY	 msg_src: 4	 msg_dst: 7	 msg_value: 3 
+DEBUG (6): Toggle led 1
+DEBUG (6): Led status: 000
+DEBUG (3): Received packet at time 0:0:7.311706523
+DEBUG (3): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REPLY	 msg_src: 4	 msg_dst: 7	 msg_value: 3 
+DEBUG (3): Toggle led 1
+DEBUG (3): Led status: 000
+DEBUG (2): Received packet at time 0:0:7.311706523
+DEBUG (2): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REPLY	 msg_src: 4	 msg_dst: 7	 msg_value: 3 
+DEBUG (2): Toggle led 0
+DEBUG (2): Led status: 110
+DEBUG (3): Sending packet at time 0:0:7.432617197 
+DEBUG (5): Received packet at time 0:0:7.434524535
+DEBUG (5): 	 Payload length 7 
+		   Payload 
+		   msg_type: DATA	 msg_src: 3	 msg_dst: 7	 msg_value: 5 
+DEBUG (5): Toggle led 0
+DEBUG (5): Led status: 100
+DEBUG (2): Sending packet at time 0:0:7.480468760 
+DEBUG (4): Received packet at time 0:0:7.490051223
+DEBUG (4): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REPLY	 msg_src: 2	 msg_dst: 7	 msg_value: 4 
+DEBUG (4): Toggle led 1
+DEBUG (4): Led status: 000
+DEBUG (1): Received packet at time 0:0:7.490051223
+DEBUG (1): 	 Payload length 7 
+		   Payload 
+		   msg_type: ROUTE_REPLY	 msg_src: 2	 msg_dst: 7	 msg_value: 4 
+DEBUG (1): Toggle led 0
+DEBUG (1): Led status: 110
+DEBUG (5): Sending packet at time 0:0:7.901367197 
+DEBUG (7): Received packet at time 0:0:7.908645597
+DEBUG (7): 	 Payload length 7 
+		   Payload 
+		   msg_type: DATA	 msg_src: 5	 msg_dst: 7	 msg_value: 5 
+DEBUG (7): Data arrived ad destination! Data: 5
+DEBUG (7): Toggle led 1
+DEBUG (7): Led status: 000
+
+
+
+Simulation finished!
