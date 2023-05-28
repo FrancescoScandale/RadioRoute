@@ -189,8 +189,8 @@ implementation {
       
     	switch (received_msg->type) { 	
 			case 0: //data message
-				dbg_clear("radio_pack","\t\t Payload \n" );
-				dbg_clear("radio_pack", "\t\t msg_type: DATA\t msg_src: %hu\t msg_dst: %hu\t msg_value: %hu \n", received_msg->src, received_msg->dst, received_msg->value);
+				dbg_clear("radio_pack","\t\t   Payload \n" );
+				dbg_clear("radio_pack", "\t\t   msg_type: DATA\t msg_src: %hu\t msg_dst: %hu\t msg_value: %hu \n", received_msg->src, received_msg->dst, received_msg->value);
 				found = FALSE;			
 				for (i = 0; i < MAX_NODES; i++) {
 					if(routing_table[i].dst == destination){
@@ -228,8 +228,8 @@ implementation {
 				break;
 
 			case 1: //Route request message
-				dbg_clear("radio_pack","\t\t Payload \n" );
-				dbg_clear("radio_pack", "\t\t msg_type: ROUTE_REQ\t msg_dst: %hu\t\n", received_msg->dst);
+				dbg_clear("radio_pack","\t\t   Payload \n" );
+				dbg_clear("radio_pack", "\t\t   msg_type: ROUTE_REQ\t msg_dst: %hu\t\n", received_msg->dst);
 			
 				// case 1.1: The node is the one required
 				if (TOS_NODE_ID == received_msg->dst){
@@ -302,8 +302,8 @@ implementation {
 				break; 
 
 			case 2: //route reply message
-				dbg_clear("radio_pack","\t\t Payload \n" );
-				dbg_clear("radio_pack", "\t\t msg_type: ROUTE_REPLY\t msg_src: %hu\t msg_dst: %hu\t msg_value: %hu \n", received_msg->src, received_msg->dst, received_msg->value);
+				dbg_clear("radio_pack","\t\t   Payload \n" );
+				dbg_clear("radio_pack", "\t\t   msg_type: ROUTE_REPLY\t msg_src: %hu\t msg_dst: %hu\t msg_value: %hu \n", received_msg->src, received_msg->dst, received_msg->value);
 				//ROUTE_REPLY arrives at everyone but node 7 doesn't have to answer
 				if (TOS_NODE_ID != received_msg->dst){
 					found = FALSE;
