@@ -20,13 +20,13 @@ typedef nx_struct radio_route_msg {
 
 typedef nx_struct routing_table_entry {
 
-	//field 1: destination
+	//field 1
 	nx_uint16_t dst;
 	
-	//field 2: next_hop
+	//field 2
 	nx_uint16_t next_hop;
 	
-	//field 3: cost
+	//field 3
 	nx_uint16_t cost;
 } routing_table_entry;
 

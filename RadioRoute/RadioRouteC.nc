@@ -1,12 +1,3 @@
-
-/*
-*	IMPORTANT:
-*	The code will be avaluated based on:
-*		Code design  
-*
-*/
- 
- 
 #include "Timer.h"
 #include "RadioRoute.h"
 
@@ -32,8 +23,6 @@ module RadioRouteC @safe() {
 	
 	//interface for LED
 	interface Leds;
-	
-    //other interfaces, if needed
   }
 }
 implementation {
@@ -45,10 +34,13 @@ implementation {
   uint16_t queue_addr;
   uint16_t time_delays[7]={61,173,267,371,479,583,689}; //Time delay in milli seconds
   
-  
+  //bools to check if the node has already sent or received a message
+  //(assumption of the challenge: only 1 req and 1 reply)
   bool route_req_sent=FALSE;
   bool route_rep_sent=FALSE;
   
+  //bool used to check if the message of type 0 (data) has already been sent
+  bool data_sent = FALSE;
   
   bool locked;
   
@@ -56,11 +48,10 @@ implementation {
   bool generate_send (uint16_t address, message_t* packet, uint8_t type);
   
   
-  routing_table_entry routing_table[MAX_NODES];
-  uint16_t destination = 7;
-  bool data_sent = FALSE;
-  uint32_t person_code = 0;
-  uint32_t j=0;
+  routing_table_entry routing_table[MAX_NODES]; //local routing table
+  uint16_t destination = 7; //final destination of the program
+  uint32_t person_code = 0; //modified person code based on the leds
+  uint32_t j=0;	//iteration variables to handle changes in the leds
   
   
   bool generate_send (uint16_t address, message_t* packet, uint8_t type){
@@ -109,10 +100,12 @@ implementation {
   bool actual_send (uint16_t address, message_t* packet){
 	/*
 	* Implement here the logic to perform the actual send of the packet using the tinyOS interfaces
-	*/	
+	*/
+
+	//start sending the packets
 	if (call AMSend.send(address, packet, sizeof(radio_route_msg_t)) == SUCCESS) {
 		dbg("radio_send", "Sending packet");	
-		locked = TRUE;
+		locked = TRUE; //lock the radio
 		dbg_clear("radio_send", " at time %s \n", sim_time_string());
 		return TRUE;
       }
@@ -124,18 +117,16 @@ implementation {
   event void Boot.booted() {
     dbg("boot","Application booted.\n");
     
-    /* Fill it ... */
     call AMControl.start(); //enable the radio
   }
 
   event void AMControl.startDone(error_t err) {
-	/* Fill it ... */
 	
 	if(err == SUCCESS) {
     	dbg("radio", "Radio on!\n");
-		if (TOS_NODE_ID == 1) {
+		if (TOS_NODE_ID == 1) {	//only node 1 starts timer1, in order to start the algorithm
 			call Timer1.startOneShot(5000);
-        	dbg("timer", "Timer1 started\n");
+        	dbg("timer", "Timer1 started at time %s\n", sim_time_string());
         }
     }
     else{
@@ -158,14 +149,18 @@ implementation {
 		return;
 	}
 	else {
+		//build packet and retrive the payload
 		radio_route_msg_t* msg = (radio_route_msg_t*)call Packet.getPayload(&packet, sizeof(radio_route_msg_t));
 		if (msg == NULL) {
 			return;
 		}
+
+		//set variables
 		msg->type = 1;
 		msg->dst = destination;
+
+		//start the sending algorithm
 		if (generate_send(AM_BROADCAST_ADDR, &packet, msg->type) == TRUE) {
-			dbg("radio_send", "Send generated\n");
 		} else {
 			dbg("radio_send", "Send is already being generated, cancelling this one.\n");
 		}
@@ -190,10 +185,10 @@ implementation {
     	radio_route_msg_t* received_msg = (radio_route_msg_t*)payload;
       
     	dbg("radio_rec", "Received packet at time %s\n", sim_time_string());
-    	dbg("radio_pack",">>>Pack \n \t Payload length %hhu \n", call Packet.payloadLength( bufPtr ));
+    	dbg("radio_pack","\t Payload length %hhu \n", call Packet.payloadLength( bufPtr ));
       
     	switch (received_msg->type) { 	
-			case 0: 
+			case 0: //data message
 				dbg_clear("radio_pack","\t\t Payload \n" );
 				dbg_clear("radio_pack", "\t\t msg_type: DATA\t msg_src: %hu\t msg_dst: %hu\t msg_value: %hu \n", received_msg->src, received_msg->dst, received_msg->value);
 				found = FALSE;			
@@ -204,7 +199,8 @@ implementation {
 					} else if(routing_table[i].cost == 0)	break;
 				}
 				
-				if(found) {
+				//case 0.1: destination node found in the routing table
+				if(found) { 
 					if (locked) {
 		  				return bufPtr;
 					}
@@ -218,15 +214,14 @@ implementation {
 						msg->dst = received_msg->dst;
 						msg->value = received_msg->value;
 						if (generate_send(routing_table[i].next_hop, &packet, msg->type) == TRUE) {
-							dbg("radio_send", "Send generated\n");
 				  		} else {
 							dbg("radio_send", "Send is already being generated, cancelling this one.\n");
 						}
 				  	}
-				} else if(TOS_NODE_ID == received_msg->dst){
+				} else if(TOS_NODE_ID == received_msg->dst){ //case 0.2: data arrived at destination node
 					dbg("radio", "Data arrived ad destination! Data: %hu\n",received_msg->value);
 				}
-				else {
+				else { //case 0.3: destination node not in the routing table, can't proceed
 					dbg("radio", "Can't send to the next node: I don't have the destination in my routing table!\n");
 				}
 				
@@ -251,7 +246,6 @@ implementation {
 						msg->dst = received_msg->dst;
 						msg->value = 1;
 						if (generate_send(AM_BROADCAST_ADDR, &packet, msg->type) == TRUE) {
-							dbg("radio_send", "Send generated\n");
 				  		} else {
 							dbg("radio_send", "Send is already being generated, cancelling this one.\n");
 						}
@@ -281,7 +275,6 @@ implementation {
 							msg->dst = received_msg->dst;
 							msg->value = routing_table[i].cost+1;
 							if (generate_send(AM_BROADCAST_ADDR, &packet, msg->type) == TRUE) {
-								dbg("radio_send", "Send generated\n");
 					  		} else {
 								dbg("radio_send", "Send is already being generated, cancelling this one.\n");
 							}
@@ -300,7 +293,6 @@ implementation {
 							msg->type = 1;
 							msg->dst = received_msg->dst;
 							if (generate_send(AM_BROADCAST_ADDR, &packet, msg->type) == TRUE) {
-								dbg("radio_send", "Send generated\n");
 					  		} else {
 								dbg("radio_send", "Send is already being generated, cancelling this one.\n");
 							}
@@ -309,7 +301,7 @@ implementation {
 				}
 				break; 
 
-			case 2:
+			case 2: //route reply message
 				dbg_clear("radio_pack","\t\t Payload \n" );
 				dbg_clear("radio_pack", "\t\t msg_type: ROUTE_REPLY\t msg_src: %hu\t msg_dst: %hu\t msg_value: %hu \n", received_msg->src, received_msg->dst, received_msg->value);
 				//ROUTE_REPLY arrives at everyone but node 7 doesn't have to answer
@@ -340,7 +332,6 @@ implementation {
 							msg->value = 5;
 							if (generate_send(routing_table[i].next_hop, &packet, msg->type) == TRUE) {
 								data_sent = TRUE;
-								dbg("radio_send", "Send generated\n");
 						  	} else {
 								dbg("radio_send", "Send is already being generated, cancelling this one.\n");
 							}					
@@ -361,7 +352,6 @@ implementation {
 								msg->dst = received_msg->dst;
 								msg->value = received_msg->value + 1; 
 								if (generate_send(AM_BROADCAST_ADDR, &packet, msg->type) == TRUE) {
-									dbg("radio_send", "Send generated\n");
 							  	} else {
 									dbg("radio_send", "Send is already being generated, cancelling this one.\n");
 								}
@@ -373,32 +363,31 @@ implementation {
 				break; 
 		}
 		
+		//person_code re-generation
 		if (!person_code) {
 			for (j = 1; j <= PERSON_CODE; j*=10) ;
 			person_code = PERSON_CODE;
 		}
 	    j = j/10;
 
+		//choose the leftmost digit and toggle the corresponding led
 		switch((person_code/j) % 3) {
 			case 0:
 				call Leds.led0Toggle();
-				dbg("led_0", "Toggle led 0, updated status %u\n", call Leds.get() & LEDS_LED0);
+				dbg("led_0", "Toggle led 0");
 				break;
 			case 1:
 				call Leds.led1Toggle();
-				dbg("led_1", "Toggle led 1, updated status %u\n", call Leds.get() & LEDS_LED1);
+				dbg("led_1", "Toggle led 1");
 				break;
 			case 2:
 				call Leds.led2Toggle();
-				dbg("led_2", "Toggle led 2, updated status %u\n", call Leds.get() & LEDS_LED2);
+				dbg("led_2", "Toggle led 2");
 				break;
 		}
-
-		// 0 means off, >0 means on
-		dbg("led_0", "Led 0 status %u\n", call Leds.get() & LEDS_LED0);
-		dbg("led_1", "Led 1 status %u\n", call Leds.get() & LEDS_LED1);
-		dbg("led_2", "Led 2 status %u\n", call Leds.get() & LEDS_LED2);
+		dbg("radio", "Led status: %u%u%u\n", call Leds.get() & LEDS_LED0, call Leds.get() & LEDS_LED1, call Leds.get() & LEDS_LED2);
 		
+		//update person_code
 		person_code %= j;
     	return bufPtr;
 	}
@@ -409,11 +398,11 @@ implementation {
 	*  Check if the packet is sent 
 	*/
 	if (&queued_packet == bufPtr && error == SUCCESS) {
-		locked = FALSE;
-    	dbg("radio_send", "Sended at time %s\n", sim_time_string());
+		locked = FALSE; //unlock the radio
     }
     else{
-      dbgerror("radio_send", "Send done error!");
+		locked = FALSE; //free the radio for other messages
+      	dbgerror("radio_send", "Send done error!");
     }
   }
 }

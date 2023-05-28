@@ -10,7 +10,7 @@ implementation {
   //add the other components here
   components LedsC; //leds components
   
-  components new AMSenderC(AM_RADIO_COUNT_MSG); //for sending msgs (AM_RADIO_COUNT_MSG constant defined in the RadioRoute.h file (todo forse da cambiare in 6)
+  components new AMSenderC(AM_RADIO_COUNT_MSG); //for sending msgs
   components new AMReceiverC(AM_RADIO_COUNT_MSG); //for receiving msgs
   components ActiveMessageC; //for managing msgs  
   
