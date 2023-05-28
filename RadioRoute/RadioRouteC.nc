@@ -385,7 +385,7 @@ implementation {
 				dbg("led_2", "Toggle led 2\n");
 				break;
 		}
-		dbg("radio", "Led status: %u%u%u\n", call Leds.get() & LEDS_LED0, call Leds.get() & LEDS_LED1, call Leds.get() & LEDS_LED2);
+		dbg("radio", "Led status: %u%u%u\n", call Leds.get() & LEDS_LED0, (call Leds.get() & LEDS_LED1)/2, (call Leds.get() & LEDS_LED2)/4);
 		
 		//update person_code
 		person_code %= j;
