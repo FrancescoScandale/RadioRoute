@@ -374,15 +374,15 @@ implementation {
 		switch((person_code/j) % 3) {
 			case 0:
 				call Leds.led0Toggle();
-				dbg("led_0", "Toggle led 0");
+				dbg("led_0", "Toggle led 0\n");
 				break;
 			case 1:
 				call Leds.led1Toggle();
-				dbg("led_1", "Toggle led 1");
+				dbg("led_1", "Toggle led 1\n");
 				break;
 			case 2:
 				call Leds.led2Toggle();
-				dbg("led_2", "Toggle led 2");
+				dbg("led_2", "Toggle led 2\n");
 				break;
 		}
 		dbg("radio", "Led status: %u%u%u\n", call Leds.get() & LEDS_LED0, call Leds.get() & LEDS_LED1, call Leds.get() & LEDS_LED2);
