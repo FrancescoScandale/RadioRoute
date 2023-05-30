@@ -81,211 +81,196 @@ DEBUG (4): Radio on!
 DEBUG (2): Radio on!
 DEBUG (5): Radio on!
 DEBUG (1): Sending packet at time 0:0:4.942382822 
-DEBUG (3): Received packet at time 0:0:4.950653037
+DEBUG (3): Received packet at time 0:0:4.951263385
+DEBUG (3): Led status: 010 - Message type: 1
 DEBUG (3): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REQ	 msg_dst: 7	
-DEBUG (3): Toggle led 1
-DEBUG (3): Led status: 010
-DEBUG (2): Received packet at time 0:0:4.950653037
+DEBUG (2): Received packet at time 0:0:4.951263385
+DEBUG (2): Led status: 010 - Message type: 1
 DEBUG (2): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REQ	 msg_dst: 7	
-DEBUG (2): Toggle led 1
-DEBUG (2): Led status: 010
-DEBUG (2): Sending packet at time 0:0:5.119140635 
-DEBUG (4): Received packet at time 0:0:5.120956420
+DEBUG (2): Sending packet at time 0:0:5.120117197 
+DEBUG (4): Received packet at time 0:0:5.129333452
+DEBUG (4): Led status: 010 - Message type: 1
 DEBUG (4): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REQ	 msg_dst: 7	
-DEBUG (4): Toggle led 1
-DEBUG (4): Led status: 010
-DEBUG (1): Received packet at time 0:0:5.120956420
+DEBUG (1): Received packet at time 0:0:5.129333452
+DEBUG (1): Led status: 010 - Message type: 1
 DEBUG (1): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REQ	 msg_dst: 7	
-DEBUG (3): Sending packet at time 0:0:5.210937510 
-DEBUG (5): Received packet at time 0:0:5.213546747
+DEBUG (3): Sending packet at time 0:0:5.211914072 
+DEBUG (5): Received packet at time 0:0:5.219024626
+DEBUG (5): Led status: 010 - Message type: 1
 DEBUG (5): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REQ	 msg_dst: 7	
-DEBUG (5): Toggle led 1
-DEBUG (5): Led status: 010
-DEBUG (4): Received packet at time 0:0:5.213546747
+DEBUG (4): Received packet at time 0:0:5.219024626
+DEBUG (4): Led status: 110 - Message type: 1
 DEBUG (4): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REQ	 msg_dst: 7	
-DEBUG (1): Received packet at time 0:0:5.213546747
+DEBUG (1): Received packet at time 0:0:5.219024626
+DEBUG (1): Led status: 110 - Message type: 1
 DEBUG (1): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REQ	 msg_dst: 7	
-DEBUG (4): Sending packet at time 0:0:5.482421885 
-DEBUG (6): Received packet at time 0:0:5.491210896
+DEBUG (4): Sending packet at time 0:0:5.491210947 
+DEBUG (6): Received packet at time 0:0:5.498397795
+DEBUG (6): Led status: 010 - Message type: 1
 DEBUG (6): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REQ	 msg_dst: 7	
-DEBUG (6): Toggle led 1
-DEBUG (6): Led status: 010
-DEBUG (3): Received packet at time 0:0:5.491210896
+DEBUG (3): Received packet at time 0:0:5.498397795
+DEBUG (3): Led status: 110 - Message type: 1
 DEBUG (3): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REQ	 msg_dst: 7	
-DEBUG (2): Received packet at time 0:0:5.491210896
+DEBUG (2): Received packet at time 0:0:5.498397795
+DEBUG (2): Led status: 110 - Message type: 1
 DEBUG (2): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REQ	 msg_dst: 7	
-DEBUG (5): Sending packet at time 0:0:5.680664072 
-DEBUG (7): Received packet at time 0:0:5.689605670
+DEBUG (5): Sending packet at time 0:0:5.686523447 
+DEBUG (7): Received packet at time 0:0:5.690338122
+DEBUG (7): Led status: 010 - Message type: 1
 DEBUG (7): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REQ	 msg_dst: 7	
-DEBUG (7): Toggle led 1
-DEBUG (7): Led status: 010
-DEBUG (6): Received packet at time 0:0:5.689605670
+DEBUG (6): Received packet at time 0:0:5.690338122
+DEBUG (6): Led status: 110 - Message type: 1
 DEBUG (6): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REQ	 msg_dst: 7	
-DEBUG (3): Received packet at time 0:0:5.689605670
+DEBUG (3): Received packet at time 0:0:5.690338122
+DEBUG (3): Led status: 010 - Message type: 1
 DEBUG (3): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REQ	 msg_dst: 7	
-DEBUG (6): Sending packet at time 0:0:6.059570322 
-DEBUG (7): Received packet at time 0:0:6.067489587
+DEBUG (6): Sending packet at time 0:0:6.067382822 
+DEBUG (7): Received packet at time 0:0:6.070495597
+DEBUG (7): Led status: 110 - Message type: 1
 DEBUG (7): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REQ	 msg_dst: 7	
-DEBUG (5): Received packet at time 0:0:6.067489587
+DEBUG (5): Received packet at time 0:0:6.070495597
+DEBUG (5): Led status: 110 - Message type: 1
 DEBUG (5): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REQ	 msg_dst: 7	
-DEBUG (4): Received packet at time 0:0:6.067489587
+DEBUG (4): Received packet at time 0:0:6.070495597
+DEBUG (4): Led status: 010 - Message type: 1
 DEBUG (4): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REQ	 msg_dst: 7	
 DEBUG (7): Sending packet at time 0:0:6.362304697 
-DEBUG (6): Received packet at time 0:0:6.368820162
+DEBUG (6): Received packet at time 0:0:6.371810867
+DEBUG (6): Led status: 010 - Message type: 2
 DEBUG (6): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REPLY	 msg_src: 7	 msg_dst: 7	 msg_value: 1 
-DEBUG (6): Toggle led 0
-DEBUG (6): Led status: 110
-DEBUG (5): Received packet at time 0:0:6.368820162
+DEBUG (5): Received packet at time 0:0:6.371810867
+DEBUG (5): Led status: 010 - Message type: 2
 DEBUG (5): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REPLY	 msg_src: 7	 msg_dst: 7	 msg_value: 1 
-DEBUG (5): Toggle led 0
-DEBUG (5): Led status: 110
-DEBUG (5): Sending packet at time 0:0:6.835937510 
-DEBUG (7): Received packet at time 0:0:6.840789776
+DEBUG (5): Sending packet at time 0:0:6.838867197 
+DEBUG (7): Received packet at time 0:0:6.842102041
+DEBUG (7): Led status: 010 - Message type: 2
 DEBUG (7): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REPLY	 msg_src: 5	 msg_dst: 7	 msg_value: 2 
-DEBUG (7): Toggle led 0
-DEBUG (7): Led status: 110
-DEBUG (6): Received packet at time 0:0:6.840789776
+DEBUG (6): Received packet at time 0:0:6.842102041
+DEBUG (6): Led status: 000 - Message type: 2
 DEBUG (6): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REPLY	 msg_src: 5	 msg_dst: 7	 msg_value: 2 
-DEBUG (6): Toggle led 0
-DEBUG (6): Led status: 010
-DEBUG (3): Received packet at time 0:0:6.840789776
+DEBUG (3): Received packet at time 0:0:6.842102041
+DEBUG (3): Led status: 000 - Message type: 2
 DEBUG (3): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REPLY	 msg_src: 5	 msg_dst: 7	 msg_value: 2 
-DEBUG (3): Toggle led 0
-DEBUG (3): Led status: 110
-DEBUG (6): Sending packet at time 0:0:6.937500010 
-DEBUG (7): Received packet at time 0:0:6.944976773
+DEBUG (6): Sending packet at time 0:0:6.940429697 
+DEBUG (7): Received packet at time 0:0:6.949569658
+DEBUG (7): Led status: 000 - Message type: 2
 DEBUG (7): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REPLY	 msg_src: 6	 msg_dst: 7	 msg_value: 2 
-DEBUG (7): Toggle led 0
-DEBUG (7): Led status: 010
-DEBUG (5): Received packet at time 0:0:6.944976773
+DEBUG (5): Received packet at time 0:0:6.949569658
+DEBUG (5): Led status: 000 - Message type: 2
 DEBUG (5): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REPLY	 msg_src: 6	 msg_dst: 7	 msg_value: 2 
-DEBUG (5): Toggle led 0
-DEBUG (5): Led status: 010
-DEBUG (4): Received packet at time 0:0:6.944976773
+DEBUG (4): Received packet at time 0:0:6.949569658
+DEBUG (4): Led status: 000 - Message type: 2
 DEBUG (4): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REPLY	 msg_src: 6	 msg_dst: 7	 msg_value: 2 
-DEBUG (4): Toggle led 0
-DEBUG (4): Led status: 110
-DEBUG (3): Sending packet at time 0:0:7.100585947 
-DEBUG (5): Received packet at time 0:0:7.104598985
+DEBUG (3): Sending packet at time 0:0:7.102539072 
+DEBUG (5): Received packet at time 0:0:7.108352637
+DEBUG (5): Led status: 100 - Message type: 2
 DEBUG (5): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REPLY	 msg_src: 3	 msg_dst: 7	 msg_value: 3 
-DEBUG (5): Toggle led 1
-DEBUG (5): Led status: 000
-DEBUG (4): Received packet at time 0:0:7.104598985
+DEBUG (4): Received packet at time 0:0:7.108352637
+DEBUG (4): Led status: 100 - Message type: 2
 DEBUG (4): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REPLY	 msg_src: 3	 msg_dst: 7	 msg_value: 3 
-DEBUG (4): Toggle led 0
-DEBUG (4): Led status: 010
-DEBUG (1): Received packet at time 0:0:7.104598985
+DEBUG (1): Received packet at time 0:0:7.108352637
+DEBUG (1): Led status: 010 - Message type: 2
 DEBUG (1): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REPLY	 msg_src: 3	 msg_dst: 7	 msg_value: 3 
-DEBUG (1): Toggle led 1
-DEBUG (1): Led status: 010
-DEBUG (1): Sending packet at time 0:0:7.164062510 
-DEBUG (3): Received packet at time 0:0:7.172500571
+DEBUG (1): Sending packet at time 0:0:7.166992197 
+DEBUG (3): Received packet at time 0:0:7.173721284
+DEBUG (3): Led status: 100 - Message type: 0
 DEBUG (3): 	 Payload length 7 
-		   Payload 
+		   Payload - node 3
 		   msg_type: DATA	 msg_src: 1	 msg_dst: 7	 msg_value: 5 
-DEBUG (3): Toggle led 0
-DEBUG (3): Led status: 010
-DEBUG (4): Sending packet at time 0:0:7.306640635 
-DEBUG (6): Received packet at time 0:0:7.311706523
+DEBUG (4): Sending packet at time 0:0:7.311523447 
+DEBUG (6): Received packet at time 0:0:7.314132685
+DEBUG (6): Led status: 100 - Message type: 2
 DEBUG (6): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REPLY	 msg_src: 4	 msg_dst: 7	 msg_value: 3 
-DEBUG (6): Toggle led 1
-DEBUG (6): Led status: 000
-DEBUG (3): Received packet at time 0:0:7.311706523
+DEBUG (3): Received packet at time 0:0:7.314132685
+DEBUG (3): Led status: 000 - Message type: 2
 DEBUG (3): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REPLY	 msg_src: 4	 msg_dst: 7	 msg_value: 3 
-DEBUG (3): Toggle led 1
-DEBUG (3): Led status: 000
-DEBUG (2): Received packet at time 0:0:7.311706523
+DEBUG (2): Received packet at time 0:0:7.314132685
+DEBUG (2): Led status: 010 - Message type: 2
 DEBUG (2): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REPLY	 msg_src: 4	 msg_dst: 7	 msg_value: 3 
-DEBUG (2): Toggle led 0
-DEBUG (2): Led status: 110
-DEBUG (3): Sending packet at time 0:0:7.432617197 
-DEBUG (5): Received packet at time 0:0:7.434524535
+DEBUG (3): Sending packet at time 0:0:7.433593760 
+DEBUG (5): Received packet at time 0:0:7.440872159
+DEBUG (5): Led status: 000 - Message type: 0
 DEBUG (5): 	 Payload length 7 
-		   Payload 
+		   Payload - node 5
 		   msg_type: DATA	 msg_src: 3	 msg_dst: 7	 msg_value: 5 
-DEBUG (5): Toggle led 0
-DEBUG (5): Led status: 100
-DEBUG (2): Sending packet at time 0:0:7.480468760 
-DEBUG (4): Received packet at time 0:0:7.490051223
+DEBUG (2): Sending packet at time 0:0:7.482421885 
+DEBUG (4): Received packet at time 0:0:7.484924311
+DEBUG (4): Led status: 000 - Message type: 2
 DEBUG (4): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REPLY	 msg_src: 2	 msg_dst: 7	 msg_value: 4 
-DEBUG (4): Toggle led 1
-DEBUG (4): Led status: 000
-DEBUG (1): Received packet at time 0:0:7.490051223
+DEBUG (1): Received packet at time 0:0:7.484924311
+DEBUG (1): Led status: 000 - Message type: 2
 DEBUG (1): 	 Payload length 7 
 		   Payload 
 		   msg_type: ROUTE_REPLY	 msg_src: 2	 msg_dst: 7	 msg_value: 4 
-DEBUG (1): Toggle led 0
-DEBUG (1): Led status: 110
-DEBUG (5): Sending packet at time 0:0:7.901367197 
-DEBUG (7): Received packet at time 0:0:7.908645597
+DEBUG (5): Sending packet at time 0:0:7.908203135 
+DEBUG (7): Received packet at time 0:0:7.914138769
+DEBUG (7): Led status: 100 - Message type: 0
 DEBUG (7): 	 Payload length 7 
-		   Payload 
+		   Payload - node 7
 		   msg_type: DATA	 msg_src: 5	 msg_dst: 7	 msg_value: 5 
 DEBUG (7): Data arrived ad destination! Data: 5
-DEBUG (7): Toggle led 1
-DEBUG (7): Led status: 000
 
 
 

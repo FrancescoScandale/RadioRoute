@@ -183,13 +183,42 @@ implementation {
 	if (len != sizeof(radio_route_msg_t)) {return bufPtr;}
     else {
     	radio_route_msg_t* received_msg = (radio_route_msg_t*)payload;
-      
+    	
     	dbg("radio_rec", "Received packet at time %s\n", sim_time_string());
+    	
+    	//person_code re-generation
+		if (person_code==0) {
+			for (j = 1; j <= PERSON_CODE; j*=10) ;
+			person_code = PERSON_CODE;
+		}
+	    j = j/10;
+
+		//choose the leftmost digit and toggle the corresponding led
+		switch((person_code/j) % 3) {
+			case 0:
+				call Leds.led0Toggle();
+				//dbg("led_0", "Toggle led 0\n");
+				break;
+			case 1:
+				call Leds.led1Toggle();
+				//dbg("led_1", "Toggle led 1\n");
+				break;
+			case 2:
+				call Leds.led2Toggle();
+				//dbg("led_2", "Toggle led 2\n");
+				break;
+		}
+		dbg("radio", "Led status: %u%u%u - Message type: %d\n", call Leds.get() & LEDS_LED0, (call Leds.get() & LEDS_LED1)/2, (call Leds.get() & LEDS_LED2)/4, received_msg->type);
+		
+		//update person_code
+		person_code %= j;
+      
+    	
     	dbg("radio_pack","\t Payload length %hhu \n", call Packet.payloadLength( bufPtr ));
       
     	switch (received_msg->type) { 	
 			case 0: //data message
-				dbg_clear("radio_pack","\t\t   Payload \n" );
+				dbg_clear("radio_pack","\t\t   Payload - node %d\n",TOS_NODE_ID);
 				dbg_clear("radio_pack", "\t\t   msg_type: DATA\t msg_src: %hu\t msg_dst: %hu\t msg_value: %hu \n", received_msg->src, received_msg->dst, received_msg->value);
 				found = FALSE;			
 				for (i = 0; i < MAX_NODES; i++) {
@@ -363,32 +392,6 @@ implementation {
 				break; 
 		}
 		
-		//person_code re-generation
-		if (!person_code) {
-			for (j = 1; j <= PERSON_CODE; j*=10) ;
-			person_code = PERSON_CODE;
-		}
-	    j = j/10;
-
-		//choose the leftmost digit and toggle the corresponding led
-		switch((person_code/j) % 3) {
-			case 0:
-				call Leds.led0Toggle();
-				dbg("led_0", "Toggle led 0\n");
-				break;
-			case 1:
-				call Leds.led1Toggle();
-				dbg("led_1", "Toggle led 1\n");
-				break;
-			case 2:
-				call Leds.led2Toggle();
-				dbg("led_2", "Toggle led 2\n");
-				break;
-		}
-		dbg("radio", "Led status: %u%u%u\n", call Leds.get() & LEDS_LED0, (call Leds.get() & LEDS_LED1)/2, (call Leds.get() & LEDS_LED2)/4);
-		
-		//update person_code
-		person_code %= j;
     	return bufPtr;
 	}
 }
